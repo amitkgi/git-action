@@ -52,3 +52,10 @@ jobs:
     - name: Publish
       run: |-
         docker push "$GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE"
+    - name: Trigger Terraform
+      if: success()
+      uses: peter-evans/repository-dispatch@v2
+      with:
+          token: ${{ secrets.REPO_B_ACCESS_TOKEN }}
+          repository: amitkgi/terrafom
+          event-type: trigger-workflow-terraform  
