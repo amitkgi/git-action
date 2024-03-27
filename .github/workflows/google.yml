@@ -5,12 +5,17 @@ on:
     branches:
       - main
       - stage
+env:
+  PROJECT_ID: ${{ vars.PROJECT_ID }}
+  GAR_LOCATION:  ${{ vars.GAR_LOCATION }}
+  REPOSITORY: ${{ vars.REPOSITORY }}
+  IMAGE: ${{ vars.IMAGE }}
 
 jobs:
   setup-build-publish-deploy:
     name: Setup, Build, Publish, and Deploy
     runs-on: ubuntu-latest
-    environment: PROD
+    environment: ${{ github.ref == 'refs/heads/main' && 'PROD' || 'STAGE' }}
 
     permissions:
       contents: 'read'
@@ -28,7 +33,6 @@ jobs:
     - name: Docker configuration
       run: |-
         echo '${{ secrets.GCP_CREDENTIALS }}'
-        echo "${{ github.ref == 'refs/heads/main' && 'PROD' || 'STAGE' }}"
     - name: Checkout
       uses: actions/checkout@v3
 
