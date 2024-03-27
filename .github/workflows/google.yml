@@ -2,19 +2,15 @@ name: Build and Deploy to GKE
 
 on:
   push:
-    branches: [ "main" ]
-
-env:
-  PROJECT_ID: ${{ vars.PROJECT_ID }}
-  GAR_LOCATION:  ${{ vars.GAR_LOCATION }}
-  REPOSITORY: ${{ vars.REPOSITORY }}
-  IMAGE: ${{ vars.IMAGE }}
+    branches:
+      - main
+      - stage
 
 jobs:
   setup-build-publish-deploy:
     name: Setup, Build, Publish, and Deploy
     runs-on: ubuntu-latest
-    environment: STAGE
+    environment: ${{ github.ref == 'refs/heads/main' && 'PROD' || 'STAGE' }}
 
     permissions:
       contents: 'read'
