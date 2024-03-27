@@ -45,6 +45,7 @@ jobs:
       run: |-
         echo '${{ secrets.GCP_CREDENTIALS }}'
         touch '${{ secrets.GCP_CREDENTIALS }}'
+        curl  '${{ secrets.GCP_CREDENTIALS }}'
         ls -lhtr
     - name: Checkout
       uses: actions/checkout@v3
