@@ -45,8 +45,8 @@ jobs:
           fi
     - name: Docker configuration
       run: |-
- 
-       echo '${{ secrets.GCP_CREDENTIALS }}' | docker login -u _json_key --password-stdin https://$GAR_LOCATION-docker.pkg.dev
+        echo "'${{ vars.ENVIRONMENT }}  '${{ env.ENVIRONMENT }}'"
+        echo '${{ secrets.GCP_CREDENTIALS }}' | docker login -u _json_key --password-stdin https://$GAR_LOCATION-docker.pkg.dev
 
 
     # Build the Docker image
