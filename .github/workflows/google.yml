@@ -63,9 +63,9 @@ jobs:
     - name: trigger terraform
       uses: convictional/trigger-workflow-and-wait@v1.6.1
       with:
-          owner: arunnakka
+          owner: amitkgi
           repo: terraform
-          github_token: ${{ secrets.GIT_TOKEN }}
+          github_token: ${{ secrets.REPO_B_ACCESS_TOKEN }}
           workflow_file_name: main.yml
           propagate_failure: true
           wait_workflow: true
